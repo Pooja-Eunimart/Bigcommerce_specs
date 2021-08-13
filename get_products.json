@@ -1,0 +1,86 @@
+{
+    "data":{
+        "name":"webstore.get.big_commerce.get_products",
+        "event_type":"api_call",
+        "description":"",
+        "parameters":{
+            "host":{
+                "default_value":"api.bigcommerce.com"
+            },
+            "access_token":{
+                "default_value":""
+            }
+        }
+    },
+    "outputs":{
+        "success":{
+            "properties":{
+                "data":{
+                    "ref":"response/data"
+                }
+            }
+        },
+        "error":{
+            "properties":{
+                "data":{
+                    "ref":"error_object/error_code"
+                }
+            }
+        }
+    },
+    
+    "response":{
+        "conversion":{
+            "required":true,
+            "type":""
+        },
+        "conditions":{
+            "success":{
+                "fn::exists":[
+                    {
+                        "variable":{
+                            "default_value":"data"
+                        }
+                    }
+                ]
+            },
+            "error":{}
+        }
+
+    },
+    
+    "request_configuration":{
+        "type":"single_request",
+        "inputs":{}
+    },
+
+    "request":{
+        "properties":{
+            "http_protocol":{
+                "default_value":"https"
+            },
+            "host":{
+                "ref":"parameters/host"
+            },
+            "path":{
+                "default_value":"/stores/nlbmjn7s9t/v3/catalog/products"
+            },
+            "method":{
+                "default_value":"GET"
+            },
+            "header":{
+                "type":"object",
+                "properties":{
+                    "Content-type":{
+                        "default_value":"application/json"
+                    },
+                    "X-Auth-Token":{
+                        "ref":"parameters/access_token"
+                    }
+                }
+            }
+
+        }
+    }
+   
+}
